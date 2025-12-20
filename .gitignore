@@ -1,5 +1,10 @@
 # Node
 node_modules/
+package.json
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+npm-shrinkwrap.json
 
 # Logs
 logs
