@@ -44,9 +44,9 @@ const connectDB = async () => {
       console.error('   2. If using MongoDB Atlas, ensure your IP is whitelisted');
       console.error('   3. Database user has proper permissions');
       console.error('\n   Example MONGO_URI format:');
-      console.error('   mongodb://username:password@cluster.mongodb.net/database');
+      console.error('   mongodb://[username]:[password]@[cluster].mongodb.net/[database]');
       console.error('   OR for local MongoDB:');
-      console.error('   mongodb://localhost:27017/tasknest');
+      console.error('   mongodb://localhost:27017/[database]');
     } else if (err.message.includes('ENOTFOUND') || err.message.includes('getaddrinfo')) {
       console.error('\n🌐 Connection Error:');
       console.error('   Cannot reach MongoDB server.');

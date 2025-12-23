@@ -27,10 +27,17 @@ coverage/
 
 # dotenv environment variables file
 .env
+.env.*
+!.env.example
 
 # Ignore local env overrides
 .env.local
 .env.*.local
+
+# Backend environment files
+backend/.env
+backend/.env.*
+backend/.env.local
 
 # OS files
 .DS_Store
