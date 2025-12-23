@@ -23,7 +23,7 @@ router.get('/', auth, async (req, res) => {
 // @access  Private
 router.post('/', auth, async (req, res) => {
   try {
-    const { title, description, priority, dueDate } = req.body;
+    const { title, description, priority, dueDate, status, imageUrl } = req.body;
 
     // Validation
     if (!title || title.trim() === '') {
@@ -34,6 +34,8 @@ router.post('/', auth, async (req, res) => {
       title: title.trim(),
       description: description ? description.trim() : '',
       priority: priority || 'medium',
+      status: status || 'research',
+      imageUrl: imageUrl || '',
       dueDate: dueDate || null,
       user: req.user.id
     });
@@ -51,7 +53,7 @@ router.post('/', auth, async (req, res) => {
 // @access  Private
 router.put('/:id', auth, async (req, res) => {
   try {
-    const { title, description, completed, priority, dueDate } = req.body;
+    const { title, description, completed, priority, dueDate, status, imageUrl } = req.body;
 
     // Find task and verify ownership
     let task = await Task.findById(req.params.id);
@@ -70,6 +72,8 @@ router.put('/:id', auth, async (req, res) => {
     if (description !== undefined) task.description = description.trim();
     if (completed !== undefined) task.completed = completed;
     if (priority !== undefined) task.priority = priority;
+    if (status !== undefined) task.status = status;
+    if (imageUrl !== undefined) task.imageUrl = imageUrl;
     if (dueDate !== undefined) task.dueDate = dueDate || null;
 
     await task.save();

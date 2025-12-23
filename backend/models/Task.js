@@ -21,6 +21,15 @@ const taskSchema = new mongoose.Schema({
     enum: ['low', 'medium', 'high'],
     default: 'medium'
   },
+  imageUrl: {
+    type: String,
+    trim: true
+  },
+  status: {
+    type: String,
+    enum: ['research', 'design', 'in_review', 'development'],
+    default: 'research'
+  },
   dueDate: {
     type: Date
   },

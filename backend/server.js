@@ -7,7 +7,8 @@ const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+// Increase JSON body limit to allow base64 images for task cover uploads
+app.use(express.json({ limit: '10mb' }));
 
 // Database connection
 const PORT = process.env.PORT || 5000;
