@@ -170,24 +170,39 @@ const Dashboard = () => {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-slate-100">
-      <header className="bg-white shadow-sm">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="h-10 w-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold">TN</div>
+            <div className="h-10 w-10 rounded-2xl bg-gradient-to-tr from-fuchsia-500 via-indigo-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-fuchsia-500/40">
+              <span className="text-white font-black text-lg">TN</span>
+            </div>
             <div>
-              <p className="font-semibold text-slate-900">TaskNest Board</p>
-              <p className="text-xs text-slate-500">Collaborate with your team</p>
+              <p className="font-semibold text-slate-50 flex items-center gap-2">
+                TaskNest Board
+                <span className="inline-flex items-center rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-300 border border-emerald-500/30">
+                  Live
+                </span>
+              </p>
+              <p className="text-xs text-slate-400">Beautiful Kanban board for your team</p>
             </div>
           </div>
           <div className="flex items-center space-x-4">
+            <div className="hidden sm:flex items-center -space-x-2 mr-2">
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border-2 border-slate-900 bg-gradient-to-tr from-sky-400 to-indigo-500 text-[11px] font-semibold text-white">
+                {user.name.charAt(0)}
+              </span>
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border-2 border-slate-900 bg-gradient-to-tr from-emerald-400 to-teal-500 text-[11px] font-semibold text-white">
+                TN
+              </span>
+            </div>
             <div className="text-right">
-              <p className="text-sm font-medium text-slate-900">{user.name}</p>
-              <p className="text-xs text-slate-500">{user.email}</p>
+              <p className="text-sm font-medium text-slate-50">{user.name}</p>
+              <p className="text-xs text-slate-400">{user.email}</p>
             </div>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition"
+              className="px-4 py-2 text-sm font-medium text-slate-900 bg-slate-50 rounded-full hover:bg-white shadow-sm shadow-slate-900/40 transition"
             >
               Logout
             </button>
@@ -198,13 +213,17 @@ const Dashboard = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">Tasks Board</h1>
-            <p className="text-sm text-slate-500">Track work across stages</p>
+            <div className="inline-flex items-center gap-2 rounded-full bg-slate-800/80 px-3 py-1 border border-slate-700/60 mb-2">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[11px] font-medium text-slate-200">Now working on this board</span>
+            </div>
+            <h1 className="text-2xl font-bold text-slate-50">Tasks Board</h1>
+            <p className="text-sm text-slate-400">Track work across colorful stages</p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowAddTask(!showAddTask)}
-              className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition shadow-sm"
+              className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-fuchsia-500 via-indigo-500 to-sky-400 text-white rounded-full hover:shadow-lg hover:shadow-fuchsia-500/30 transition shadow-md"
             >
               <span className="mr-2 text-lg">＋</span>
               New Task
@@ -213,12 +232,12 @@ const Dashboard = () => {
         </div>
 
         {showAddTask && (
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
+          <div className="bg-slate-900/60 rounded-2xl shadow-lg shadow-slate-900/60 border border-slate-700/60 p-5 mb-6 backdrop-blur">
             <form onSubmit={handleAddTask} className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="md:col-span-2">
-                <label className="text-sm font-medium text-slate-700">Title *</label>
+                <label className="text-sm font-medium text-slate-200">Title *</label>
                 <input
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-900/70 text-slate-50 px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-400 placeholder:text-slate-500"
                   required
                   value={taskForm.title}
                   onChange={(e) => setTaskForm({ ...taskForm, title: e.target.value })}
@@ -226,9 +245,9 @@ const Dashboard = () => {
                 />
               </div>
               <div className="md:col-span-2">
-                <label className="text-sm font-medium text-slate-700">Description</label>
+                <label className="text-sm font-medium text-slate-200">Description</label>
                 <textarea
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-900/70 text-slate-50 px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-400 placeholder:text-slate-500"
                   rows={3}
                   value={taskForm.description}
                   onChange={(e) => setTaskForm({ ...taskForm, description: e.target.value })}
@@ -236,9 +255,9 @@ const Dashboard = () => {
                 />
               </div>
               <div>
-                <label className="text-sm font-medium text-slate-700">Priority</label>
+                <label className="text-sm font-medium text-slate-200">Priority</label>
                 <select
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-900/70 text-slate-50 px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-400"
                   value={taskForm.priority}
                   onChange={(e) => setTaskForm({ ...taskForm, priority: e.target.value })}
                 >
@@ -248,9 +267,9 @@ const Dashboard = () => {
                 </select>
               </div>
               <div>
-                <label className="text-sm font-medium text-slate-700">Status</label>
+                <label className="text-sm font-medium text-slate-200">Status</label>
                 <select
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-900/70 text-slate-50 px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-400"
                   value={taskForm.status}
                   onChange={(e) => setTaskForm({ ...taskForm, status: e.target.value })}
                 >
@@ -260,16 +279,16 @@ const Dashboard = () => {
                 </select>
               </div>
               <div>
-                <label className="text-sm font-medium text-slate-700">Due Date</label>
+                <label className="text-sm font-medium text-slate-200">Due Date</label>
                 <input
                   type="date"
-                  className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-900/70 text-slate-50 px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-400"
                   value={taskForm.dueDate}
                   onChange={(e) => setTaskForm({ ...taskForm, dueDate: e.target.value })}
                 />
               </div>
               <div className="md:col-span-2">
-                <label className="text-sm font-medium text-slate-700">Cover Image (optional)</label>
+                <label className="text-sm font-medium text-slate-200">Cover Image (optional)</label>
                 <input
                   type="file"
                   accept="image/*"
@@ -281,7 +300,7 @@ const Dashboard = () => {
                     <img
                       src={taskForm.imageUrl}
                       alt="Preview"
-                      className="h-32 w-full object-cover rounded-lg border border-slate-200"
+                      className="h-32 w-full object-cover rounded-lg border border-slate-700"
                     />
                   </div>
                 )}
@@ -290,13 +309,13 @@ const Dashboard = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddTask(false)}
-                  className="px-4 py-2 text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200"
+                  className="px-4 py-2 text-slate-200 bg-slate-800 rounded-full hover:bg-slate-700 border border-slate-600"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-sm"
+                  className="px-4 py-2 bg-gradient-to-r from-fuchsia-500 via-indigo-500 to-sky-400 text-white rounded-full hover:shadow-lg hover:shadow-fuchsia-500/40 shadow-md"
                 >
                   Create Task
                 </button>
@@ -308,7 +327,10 @@ const Dashboard = () => {
         {/* Board */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
           {groupByStatus.map((column) => (
-            <div key={column.key} className="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+            <div
+              key={column.key}
+              className="rounded-2xl shadow-lg shadow-slate-900/40 border border-slate-700/60 p-4 bg-slate-900/70 backdrop-blur"
+            >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <span className={`h-2 w-2 rounded-full ${
@@ -316,15 +338,17 @@ const Dashboard = () => {
                     column.key === 'design' ? 'bg-blue-500' :
                     column.key === 'in_review' ? 'bg-amber-500' : 'bg-emerald-500'
                   }`}></span>
-                  <p className="font-semibold text-slate-800">{column.label}</p>
-                  <span className="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded-full">{column.items.length}</span>
+                  <p className="font-semibold text-slate-100">{column.label}</p>
+                  <span className="text-xs bg-slate-800 text-slate-200 px-2 py-1 rounded-full border border-slate-600">
+                    {column.items.length}
+                  </span>
                 </div>
                 <button
                   onClick={() => {
                     setShowAddTask(true);
                     setTaskForm({ ...taskForm, status: column.key });
                   }}
-                  className="text-slate-400 hover:text-indigo-600 text-lg"
+                  className="text-slate-400 hover:text-indigo-400 text-lg"
                   title="Add task to this column"
                 >
                   ＋
@@ -333,7 +357,7 @@ const Dashboard = () => {
 
               <div className="space-y-3">
                 {column.items.length === 0 && (
-                  <div className="text-sm text-slate-400 border border-dashed border-slate-200 rounded-lg p-4 text-center">
+                  <div className="text-sm text-slate-500 border border-dashed border-slate-700 rounded-lg p-4 text-center bg-slate-900/40">
                     No tasks here yet
                   </div>
                 )}
